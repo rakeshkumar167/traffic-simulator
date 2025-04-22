@@ -1,5 +1,5 @@
 {
-  "name": "traffic-sim2",
+  "name": "traffic-simulator",
   "version": "1.0.0",
   "description": "A traffic simulation at a crossroad using p5.js",
   "main": "index.js",
