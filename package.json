@@ -1,0 +1,16 @@
+{
+  "name": "traffic-sim2",
+  "version": "1.0.0",
+  "description": "A traffic simulation at a crossroad using p5.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "p5": "^1.6.0"
+  },
+  "devDependencies": {
+    "vite": "^2.9.16"
+  }
+}
