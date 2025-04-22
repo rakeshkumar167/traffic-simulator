@@ -1,4 +1,6 @@
-class Simulation {
+import { Vehicle } from './Vehicle.js';
+
+export class Simulation {
   constructor() {
     this.vehicles = [];
     this.spawnInterval = 50; // frames between spawns

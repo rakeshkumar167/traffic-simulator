@@ -1,4 +1,6 @@
-class Vehicle {
+import { createVector } from 'https://cdn.skypack.dev/p5';
+
+export class Vehicle {
   constructor(x, y, dirX, dirY) {
     this.pos = createVector(x, y);
     this.dir = createVector(dirX, dirY).normalize();
