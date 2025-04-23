@@ -9,14 +9,26 @@ class Simulation {
     this.allRedDuration = 30; // Duration of all-red phase
     this.currentPhase = 0;
     this.phases = [
-      { north: "green", south: "green", east: "red", west: "red" },    // Phase 1: N-S green
-      { north: "yellow", south: "yellow", east: "red", west: "red" },  // Phase 2: N-S yellow
-      { north: "red", south: "red", east: "red", west: "red" },        // Phase 3: All red
-      { north: "red", south: "red", east: "green", west: "green" },    // Phase 4: E-W green
-      { north: "red", south: "red", east: "yellow", west: "yellow" },  // Phase 5: E-W yellow
-      { north: "red", south: "red", east: "red", west: "red" }         // Phase 6: All red
+      { north: "green", south: "red", east: "red", west: "red" },    // Phase 1: North green
+      { north: "yellow", south: "red", east: "red", west: "red" },   // Phase 2: North yellow
+      { north: "red", south: "red", east: "red", west: "red" },      // Phase 3: All red
+      { north: "red", south: "red", east: "green", west: "red" },    // Phase 4: East green
+      { north: "red", south: "red", east: "yellow", west: "red" },   // Phase 5: East yellow
+      { north: "red", south: "red", east: "red", west: "red" },      // Phase 6: All red
+      { north: "red", south: "green", east: "red", west: "red" },    // Phase 7: South green
+      { north: "red", south: "yellow", east: "red", west: "red" },   // Phase 8: South yellow
+      { north: "red", south: "red", east: "red", west: "red" },      // Phase 9: All red
+      { north: "red", south: "red", east: "red", west: "green" },    // Phase 10: West green
+      { north: "red", south: "red", east: "red", west: "yellow" },   // Phase 11: West yellow
+      { north: "red", south: "red", east: "red", west: "red" }       // Phase 12: All red
     ];
     this.phaseDurations = [
+      this.greenDuration,
+      this.yellowDuration,
+      this.allRedDuration,
+      this.greenDuration,
+      this.yellowDuration,
+      this.allRedDuration,
       this.greenDuration,
       this.yellowDuration,
       this.allRedDuration,

@@ -115,13 +115,13 @@ function drawRoad() {
   }
 
   // Draw traffic light backgrounds and bulbs
-  drawTrafficLight(510, 280, simulation.signal.north, true);
-  drawTrafficLight(290, 520, simulation.signal.south, true);
-  drawTrafficLight(520, 510, simulation.signal.east);
-  drawTrafficLight(280, 290, simulation.signal.west);
+  drawTrafficLight(290, 280, simulation.signal.east, false, "2");  // East moved to North's position
+  drawTrafficLight(280, 510, simulation.signal.north, true, "1");  // North moved to West's position
+  drawTrafficLight(520, 290, simulation.signal.south, true, "3");  // South moved to East's position and rotated
+  drawTrafficLight(510, 520, simulation.signal.west, false, "4");    // West moved to South's position and rotated
 }
 
-function drawTrafficLight(x, y, state, horizontal = false) {
+function drawTrafficLight(x, y, state, horizontal = false, signalNumber) {
   push();
   translate(x, y);
   if (horizontal) {
@@ -142,5 +142,11 @@ function drawTrafficLight(x, y, state, horizontal = false) {
   // Green light
   fill(state === "green" ? "lime" : "darkgrey");
   ellipse(0, 10, 10);
+
+  // Add signal number label
+  fill(255);
+  textSize(12);
+  textAlign(CENTER, CENTER);
+  text(signalNumber, 0, -30);
   pop();
 } 
