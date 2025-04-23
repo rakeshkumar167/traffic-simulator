@@ -62,13 +62,33 @@ class Simulation {
   spawnVehicle() {
     const dir = random(["north", "south", "east", "west"]);
     if (dir === "north") {
-      this.vehicles.push(new Vehicle(380, 800, 0, -1));
+      const randomNumber = random(0, 1);
+      if (randomNumber < 0.5) {
+        this.vehicles.push(new Vehicle(340, height, 0, -1));
+      } else {
+        this.vehicles.push(new Vehicle(380, height, 0, -1));
+      }
     } else if (dir === "south") {
-      this.vehicles.push(new Vehicle(420, 0, 0, 1));
+      const randomNumber = random(0, 1);
+      if (randomNumber < 0.5) {
+        this.vehicles.push(new Vehicle(460, 0, 0, 1));
+      } else {
+        this.vehicles.push(new Vehicle(420, 0, 0, 1));
+      }
     } else if (dir === "east") {
-      this.vehicles.push(new Vehicle(0, 380, 1, 0));
+      const randomNumber = random(0, 1);
+      if (randomNumber < 0.5) {
+        this.vehicles.push(new Vehicle(0, 340, 1, 0));
+      } else {
+        this.vehicles.push(new Vehicle(0, 380, 1, 0));
+      }
     } else if (dir === "west") {
-      this.vehicles.push(new Vehicle(800, 420, -1, 0));
+      const randomNumber = random(0, 1);
+      if (randomNumber < 0.5) {
+        this.vehicles.push(new Vehicle(width, 460, -1, 0));
+      } else {
+        this.vehicles.push(new Vehicle(width, 420, -1, 0));
+      }
     }
   }
 } 

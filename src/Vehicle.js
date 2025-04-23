@@ -22,7 +22,7 @@ class Vehicle {
     ];
     this.color = random(carColors);
     this.initialDir = this.dir.copy();
-    this.stoppingDistance = 30;
+    this.stoppingDistance = 40;
     this.buffer = 5;
     this.zebraCrossingDistance = 5;
     this.lane = random([0, 1]); // 0 for left lane, 1 for right lane
@@ -48,7 +48,7 @@ class Vehicle {
   }
 
   isAtIntersection() {
-    return this.pos.x > 330 && this.pos.x < 470 && this.pos.y > 330 && this.pos.y < 470;
+    return this.pos.x > 320 && this.pos.x < 480 && this.pos.y > 320 && this.pos.y < 480;
   }
 
   shouldStopBeforeIntersection(signal, vehicles) {
@@ -69,13 +69,13 @@ class Vehicle {
 
   getDistanceToZebraCrossing() {
     if (this.initialDir.y < 0) { // North
-      return this.pos.y - 455;
+      return this.pos.y - 475;
     } else if (this.initialDir.y > 0) { // South
-      return 335 - this.pos.y;
+      return 315 - this.pos.y;
     } else if (this.initialDir.x < 0) { // West
-      return this.pos.x - 455;
+      return this.pos.x - 475;
     } else { // East
-      return 335 - this.pos.x;
+      return 315 - this.pos.x;
     }
   }
 

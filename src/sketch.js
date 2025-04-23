@@ -5,12 +5,16 @@ function setup() {
   canvas.parent('canvas-container');
   simulation = new Simulation();
 
-  // Get the slider element
+  // Get the slider element and value display
   let spawnRateSlider = document.getElementById('spawnRateSlider');
+  let spawnRateValue = document.getElementById('spawnRateValue');
   
   // Add event listener for slider changes
   spawnRateSlider.addEventListener('input', function() {
-    simulation.spawnInterval = parseInt(this.value);
+    // Reverse the value (120 - value) so lower slider = lower spawn rate
+    const reversedValue = 120 - parseInt(this.value);
+    simulation.spawnInterval = reversedValue;
+    spawnRateValue.textContent = reversedValue;
   });
 }
 
@@ -19,69 +23,102 @@ function draw() {
   drawRoad();
   simulation.update();
   simulation.draw();
+  
+  // Add tick marks on both axes
+  stroke(0); // Black color for lines
+  strokeWeight(1);
+  textSize(12);
+  textAlign(CENTER, CENTER);
+  fill(0); // Black color for text
+  
+  // X-axis ticks (bottom)
+  for (let x = 0; x <= width; x += 100) {
+    line(x, height - 5, x, height);
+    push();
+    translate(x, height + 15);
+    text(`${x}px`, 0, 0);
+    pop();
+    push();
+    translate(x, height + 30);
+    text(`(${x},0)`, 0, 0);
+    pop();
+  }
+  
+  // Y-axis ticks (left)
+  for (let y = 0; y <= height; y += 100) {
+    line(0, y, 5, y);
+    push();
+    translate(-40, y);
+    text(`${y}px`, 0, 0);
+    pop();
+    push();
+    translate(-80, y);
+    text(`(0,${y})`, 0, 0);
+    pop();
+  }
 }
 
 function drawRoad() {
   // Draw central vertical and horizontal black road
   fill(0);
-  rect(340, 0, 120, height); // Vertical road (wider)
-  rect(0, 340, width, 120); // Horizontal road (wider)
+  rect(320, 0, 160, height); // Vertical road (wider)
+  rect(0, 320, width, 160); // Horizontal road (wider)
 
   // Lane markings - vertical
   stroke(150);
   strokeWeight(2);
-  for (let y = 0; y < height; y += 40) {
-    if (y < 340 || y > 460) { // Skip intersection area
+  for (let y = 0; y < height; y += 60) {
+    if (y < 320 || y > 480) { // Skip intersection area
+      //line(340, y, 340, y + 20);
       line(360, y, 360, y + 20);
-      line(380, y, 380, y + 20);
-      line(420, y, 420, y + 20);
       line(440, y, 440, y + 20);
+      //line(460, y, 460, y + 20);
     }
   }
   // Lane markings - horizontal
-  for (let x = 0; x < width; x += 40) {
-    if (x < 340 || x > 460) { // Skip intersection area
+  for (let x = 0; x < width; x += 60) {
+    if (x < 320 || x > 480) { // Skip intersection area
+      //line(x, 340, x + 20, 340);
       line(x, 360, x + 20, 360);
-      line(x, 380, x + 20, 380);
-      line(x, 420, x + 20, 420);
       line(x, 440, x + 20, 440);
+      //line(x, 460, x + 20, 460);
     }
   }
   // Continuous center lines until intersection
   stroke(150);
   strokeWeight(2);
   // Vertical center line segments
-  line(400, 0, 400, 340);
-  line(400, 460, 400, height);
+  line(400, 0, 400, 320);
+  line(400, 480, 400, height);
   // Horizontal center line segments
-  line(0, 400, 340, 400);
-  line(460, 400, width, 400);
+  line(0, 400, 320, 400);
+  line(480, 400, width, 400);
   noStroke();
 
   // Zebra crossings - extended across entire road
   fill(255);
   // North zebra crossing
-  for (let i = 0; i < 24; i++) {
-    rect(340 + i * 5, 335, 2, 10);
+  for (let i = 0; i < 32; i++) {
+    rect(320 + i * 5, 315, 2, 10);
   }
   // South zebra crossing
-  for (let i = 0; i < 24; i++) {
-    rect(340 + i * 5, 455, 2, 10);
+  for (let i = 0; i < 32; i++) {
+    rect(320 + i * 5, 475, 2, 10);
   }
   // East zebra crossing
-  for (let i = 0; i < 24; i++) {
-    rect(335, 340 + i * 5, 10, 2);
+  for (let i = 0; i < 32; i++) {
+    rect(315, 320 + i * 5, 10, 2);
   }
   // West zebra crossing
-  for (let i = 0; i < 24; i++) {
-    rect(455, 340 + i * 5, 10, 2);
+  for (let i = 0; i < 32; i++) {
+    rect(475, 320 + i * 5, 10, 2);
   }
 
   // Draw traffic light backgrounds and bulbs
-  drawTrafficLight(490, 300, simulation.signal.north, true);
-  drawTrafficLight(310, 500, simulation.signal.south, true);
-  drawTrafficLight(500, 490, simulation.signal.east);
-  drawTrafficLight(300, 310, simulation.signal.west);
+  drawTrafficLight(510, 280, simulation.signal.north, true);
+  drawTrafficLight(290, 520, simulation.signal.south, true);
+  drawTrafficLight(520, 510, simulation.signal.east);
+  drawTrafficLight(280, 290, simulation.signal.west);
 }
 
 function drawTrafficLight(x, y, state, horizontal = false) {
